@@ -7,10 +7,7 @@ rust:
 script: |
   cargo build --verbose &&
   cargo test  --verbose &&
-  cargo doc   --verbose &&
-  cargo build --verbose --no-default-features &&
-  cargo test  --verbose --no-default-features &&
-  cargo doc   --verbose --no-default-features
+  cargo doc   --verbose
 matrix:
   include:
     - rust: nightly-2019-04-19
