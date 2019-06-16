@@ -76,12 +76,12 @@ impl Address {
 #[test]
 fn can_deserialize_en() {
   // Ensure accessing lazy address doesn't panic
-  let address: &Address = &*ADDRESS_EN;
+  let _: &Address = &*ADDRESS_EN;
 }
 
 #[cfg(feature = "localization-fr")]
 #[test]
 fn can_deserialize_fr() {
   // Ensure accessing lazy address doesn't panic
-  let address: &Address = &*ADDRESS_FR;
+  let _: &Address = &*ADDRESS_FR;
 }
