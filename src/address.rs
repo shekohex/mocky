@@ -5,7 +5,7 @@ use serde::Deserialize;
 use crate::{utils, MockyLocale};
 
 #[cfg(feature = "localization-en")]
-const ADDRESS_EN_BYTES: &'static [u8] =
+const ADDRESS_EN_BYTES: &[u8] =
   include_bytes!(concat!(env!("OUT_DIR"), "/en/address.cbor"));
 
 #[cfg(feature = "localization-en")]
@@ -14,7 +14,7 @@ lazy_static! {
     serde_cbor::from_slice(&ADDRESS_EN_BYTES).unwrap();
 }
 #[cfg(feature = "localization-fr")]
-const ADDRESS_FR_BYTES: &'static [u8] =
+const ADDRESS_FR_BYTES: &[u8] =
   include_bytes!(concat!(env!("OUT_DIR"), "/fr/address.cbor"));
 
 #[cfg(feature = "localization-fr")]
