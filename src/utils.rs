@@ -39,20 +39,30 @@ mod tests_utils {
   fn test_replace_symbols() {
     let data = "###-###";
     let result = replace_symbols(data);
+    println!("{}", result);
     assert_eq!(result.len(), data.len());
     assert_ne!(result, data);
-    println!("{}", result);
+    assert!(result[0..3].chars().all(char::is_numeric));
+    assert!(result[4..7].chars().all(char::is_numeric));
     // ----
     let data = "???-???";
     let result = replace_symbols(data);
+    println!("{}", result);
     assert_eq!(result.len(), data.len());
     assert_ne!(result, data);
-    println!("{}", result);
+    assert!(result[0..3].chars().all(char::is_alphabetic));
+    assert!(result[4..7].chars().all(char::is_alphabetic));
     // ----
     let data = "t*#-#*";
     let result = replace_symbols(data);
+    println!("{}", result);
     assert_eq!(result.len(), data.len());
     assert_ne!(result, data);
-    println!("{}", result);
+    assert_eq!(&result[0..1], "t");
+    assert!(result[1..2].chars().all(char::is_alphanumeric));
+    assert!(result[2..3].chars().all(char::is_numeric));
+    assert_eq!(&result[3..4], "-");
+    assert!(result[4..5].chars().all(char::is_numeric));
+    assert!(result[5..6].chars().all(char::is_alphanumeric));
   }
 }
