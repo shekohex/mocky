@@ -1,26 +1,26 @@
 use lazy_static::lazy_static;
 use rand::seq::SliceRandom;
 use serde::Deserialize;
-use smush::Encoding;
 
 use crate::{utils, MockyLocale};
 
 #[cfg(feature = "localization-en")]
+const ADDRESS_EN_BYTES: &'static [u8] =
+  include_bytes!(concat!(env!("OUT_DIR"), "/en/address.cbor"));
+
+#[cfg(feature = "localization-en")]
 lazy_static! {
-  static ref ADDRESS_EN_BYTES: Vec<u8> =
-    smush::decode(include_bytes!("./locales/en/address.br"), Encoding::Brotli)
-      .unwrap();
-  pub(crate) static ref ADDRESS_EN: Address =
-    serde_json::from_slice(&ADDRESS_EN_BYTES).unwrap();
+  static ref ADDRESS_EN: Address =
+    serde_cbor::from_slice(&ADDRESS_EN_BYTES).unwrap();
 }
+#[cfg(feature = "localization-fr")]
+const ADDRESS_FR_BYTES: &'static [u8] =
+  include_bytes!(concat!(env!("OUT_DIR"), "/fr/address.cbor"));
 
 #[cfg(feature = "localization-fr")]
 lazy_static! {
-  static ref ADDRESS_FR_BYTES: Vec<u8> =
-    smush::decode(include_bytes!("./locales/fr/address.br"), Encoding::Brotli)
-      .unwrap();
-  pub(crate) static ref ADDRESS_FR: Address =
-    serde_json::from_slice(&ADDRESS_FR_BYTES).unwrap();
+  static ref ADDRESS_FR: Address =
+    serde_cbor::from_slice(&ADDRESS_FR_BYTES).unwrap();
 }
 
 #[cfg(feature = "address")]
@@ -43,7 +43,7 @@ impl Address {
       #[cfg(feature = "localization-en")]
       En => &ADDRESS_EN,
       #[cfg(feature = "localization-fr")]
-      FR => &ADDRESS_FR,
+      Fr => &ADDRESS_FR,
     }
   }
 
@@ -70,4 +70,18 @@ impl Address {
       .unwrap_or_else(|| &"#####-####");
     utils::replace_symbols(postcode)
   }
+}
+
+#[cfg(feature = "localization-en")]
+#[test]
+fn can_deserialize_en() {
+  // Ensure accessing lazy address doesn't panic
+  let address: &Address = &*ADDRESS_EN;
+}
+
+#[cfg(feature = "localization-fr")]
+#[test]
+fn can_deserialize_fr() {
+  // Ensure accessing lazy address doesn't panic
+  let address: &Address = &*ADDRESS_FR;
 }
