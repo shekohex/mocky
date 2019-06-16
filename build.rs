@@ -1,10 +1,4 @@
-use std::{
-  env,
-  error::Error,
-  fs,
-  io::{self, prelude::*},
-  path::PathBuf,
-};
+use std::{env, fs, io::prelude::*, path::PathBuf};
 
 use itertools::Itertools;
 
