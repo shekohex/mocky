@@ -16,6 +16,7 @@ pub(crate) enum MockyLocale {
   FR,
 }
 
+#[cfg(feature = "localization-en")]
 impl Default for MockyLocale {
   fn default() -> Self { MockyLocale::En }
 }
