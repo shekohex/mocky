@@ -8,7 +8,7 @@ const MIN_WORDS_PER_PARAGRAPH: usize = 150;
 const MAX_WORDS_PER_PARAGRAPH: usize = 200;
 
 impl Lorem {
-    //
+
     pub fn word() -> String {
         Self::words(1)
     }
@@ -32,7 +32,7 @@ impl Lorem {
     pub fn paragraphs(n: usize) -> Vec<String> {
         let mut paragraphs : Vec<String> = vec!(Self::head_paragraph());
 
-        for i in 0..n{
+        for _i in 0..n{
             paragraphs.push(Self::paragraph());
         }
 
