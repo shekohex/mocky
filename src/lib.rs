@@ -6,6 +6,7 @@
 use crate::address::Address;
 
 mod address;
+mod lorem;
 mod utils;
 
 #[derive(Debug)]
